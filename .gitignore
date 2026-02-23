@@ -1,0 +1,32 @@
+# ─── Dependencies ────────────────────────────────────────────────────────────
+node_modules/
+
+# ─── Next.js Build Output ────────────────────────────────────────────────────
+.next/
+out/
+build/
+
+# ─── Environment Variables ───────────────────────────────────────────────────
+# Catch ALL .env files (.env, .env.local, .env.development.local, etc.)
+.env*
+# Keep .env.example — it's safe to commit (no real secrets)
+!.env.example
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+
+# ─── TypeScript ──────────────────────────────────────────────────────────────
+*.tsbuildinfo
+
+# ─── OS / Editor ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ─── Vercel ──────────────────────────────────────────────────────────────────
+.vercel
