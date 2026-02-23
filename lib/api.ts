@@ -4,8 +4,11 @@ import { useAuthStore } from './auth-store';
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 
+// If `NEXT_PUBLIC_API_URL` is provided at build time, use it for browser requests
+// so client-side calls go directly to the backend in production. Otherwise
+// keep relative URLs so local dev rewrites (in `next.config.js`) work.
 export const api = axios.create({
-    baseURL: typeof window !== 'undefined' ? '' : API_URL,
+    baseURL: process.env.NEXT_PUBLIC_API_URL ? API_URL : (typeof window !== 'undefined' ? '' : API_URL),
     withCredentials: true, 
     headers: { 'Content-Type': 'application/json' },
     timeout: 10_000,
