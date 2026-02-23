@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuthStore } from '@/lib/auth-store';
 import { authApi } from '@/lib/api';
@@ -12,7 +12,7 @@ interface FieldError {
     password?: string;
 }
 
-export default function LoginPage() {
+function LoginForm() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const { setAccessToken, setUser, isAuthenticated } = useAuthStore();
@@ -54,7 +54,7 @@ export default function LoginPage() {
 
             setUser(data.data.user);
 
-            
+
             const destination = searchParams.get('from') || '/dashboard';
             router.replace(destination);
         } catch (err) {
@@ -187,3 +187,20 @@ export default function LoginPage() {
         </main>
     );
 }
+
+export default function LoginPage() {
+    return (
+        <Suspense fallback={
+            <main className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
+                <div className="animate-pulse flex flex-col items-center">
+                    <div className="w-14 h-14 bg-slate-800 rounded-2xl mb-4" />
+                    <div className="h-4 w-32 bg-slate-800 rounded mb-2" />
+                    <div className="h-3 w-48 bg-slate-800 rounded" />
+                </div>
+            </main>
+        }>
+            <LoginForm />
+        </Suspense>
+    );
+}
+
